@@ -1,37 +1,26 @@
-// index.js (Arquivo Principal do Servidor)
+// index.js (Atualizado para incluir a conexão com o DB)
 
-// Importações e Configurações
-require('dotenv').config(); // Carrega variáveis do .env
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+// Importação da configuração do banco de dados
+const db = require('./db.config'); 
 
-// Inicialização do Aplicativo Express
 const app = express();
 const PORT = process.env.PORT || 3001;
 const CORS_ORIGIN = process.env.CORS_ORIGIN;
 
-// --- Middlewares Globais ---
-
-// CORS: Configurado para aceitar requisições do front-end especificado
+// --- Middlewares Globais (sem alteração) ---
 const corsOptions = {
-    origin: CORS_ORIGIN, // Dominio: http://127.0.0.1:3000/
+    origin: CORS_ORIGIN, 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 };
 app.use(cors(corsOptions));
-
-// Body Parser: Para que o Express entenda JSON
 app.use(express.json()); 
-// Body Parser: Para que o Express entenda dados de formulário (URL-encoded)
 app.use(express.urlencoded({ extended: true }));
 
-// --- Estrutura de Rotas Modulares ---
-// IMPORTANTE: Aqui, você colocaria todas as suas importações de rotas.
-// Exemplo: 
-// const authRoutes = require('./auth.routes'); 
-// app.use('/api/auth', authRoutes);
-
-// Rota de Teste Simples
+// Rota de Teste Simples (sem alteração)
 app.get('/', (req, res) => {
     res.status(200).json({ 
         message: 'Bem-vindo ao Backend aldeify!', 
@@ -41,10 +30,10 @@ app.get('/', (req, res) => {
 });
 
 // --- Inicialização do Servidor ---
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`🚀 Servidor aldeify rodando em http://localhost:${PORT}`);
     console.log(`CORS habilitado para: ${CORS_ORIGIN}`);
     
-    // NOTA: A conexão com o DB será iniciada aqui na Meta M2
-    // require('./db.config').connectDB(); 
+    // CHAMADA: Inicia a conexão com o banco de dados MySQL
+    await db.connectDB(); 
 });
