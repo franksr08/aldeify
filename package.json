@@ -1,0 +1,29 @@
+{
+  "name": "aldeify-backend",
+  "version": "1.0.0",
+  "description": "Backend modularizado para o marketplace aldeify em Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mysql",
+    "marketplace"
+  ],
+  "author": "aldeify creator",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.35.2"
+    // Adicionaremos mais dependências (bcrypt, jsonwebtoken, etc.) nas próximas metas.
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
